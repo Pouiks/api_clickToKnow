@@ -1,6 +1,9 @@
 // Mini API Backend pour OneClickToKnow
 // Déployez sur Vercel, Netlify, ou votre serveur
 
+// Charger les variables d'environnement depuis .env (pour le développement local)
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -14,6 +17,66 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Route pour la politique de confidentialité
+app.get('/privacy', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Politique de Confidentialité - OneClickToKnow</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                line-height: 1.6;
+                background: #f5f5f5;
+            }
+            .container {
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            h1, h2 { color: #333; }
+            h1 { color: #667eea; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Politique de Confidentialité - OneClickToKnow</h1>
+            <p><strong>Dernière mise à jour :</strong> 4 octobre 2025</p>
+            
+            <h2>1. Données collectées</h2>
+            <p>Notre extension OneClickToKnow ne collecte aucune donnée personnelle identifiable.</p>
+            
+            <h2>2. Traitement du texte</h2>
+            <p>Lorsque vous sélectionnez du texte et demandez une explication :</p>
+            <ul>
+                <li>Le texte sélectionné est envoyé temporairement à notre API</li>
+                <li>Aucune donnée personnelle n'est transmise</li>
+                <li>Le texte n'est pas stocké de manière permanente</li>
+            </ul>
+            
+            <h2>3. Utilisation des données</h2>
+            <p>Le texte sélectionné est uniquement utilisé pour générer une explication via l'IA.</p>
+            
+            <h2>4. Partage des données</h2>
+            <p>Nous ne partageons aucune donnée avec des tiers.</p>
+            
+            <h2>5. Sécurité</h2>
+            <p>Toutes les communications sont sécurisées via HTTPS.</p>
+            
+            <h2>6. Contact</h2>
+            <p>Pour toute question : support@oneclicktoknow.com</p>
+        </div>
+    </body>
+    </html>
+  `);
+});
 // Route pour expliquer du texte
 app.post('/api/explain', async (req, res) => {
   try {
