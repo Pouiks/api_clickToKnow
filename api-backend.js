@@ -6,7 +6,8 @@ const cors = require('cors');
 const app = express();
 
 // Configuration
-const OPENAI_API_KEY = 'sk-proj-VOTRE-CLE-ICI'; // Remplacez par votre vraie clé
+// ✅ Variable d'environnement
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Remplacez par votre vraie clé
 const PORT = process.env.PORT || 3000;
 
 // Middleware
